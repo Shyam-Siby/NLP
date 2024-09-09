@@ -1,3 +1,4 @@
+from os import name
 import gensim
 from gensim.utils import simple_preprocess
 from gensim.parsing.preprocessing import remove_stopwords
@@ -15,7 +16,7 @@ def process_text(text):
     tokens = simple_preprocess(text)  # Gensim's simple_preprocess handles basic tokenization
     
     # Remove stop words using Gensim
-    tokens_no_stopwords = gensim.parsing.preprocessing.remove_stopwords(' '.join(tokens)).split()
+    tokens_no_stopwords = remove_stopwords(' '.join(tokens)).split()
     
     # Stemming using NLTK
     stemmed_tokens = [stemmer.stem(token) for token in tokens_no_stopwords]
@@ -26,7 +27,7 @@ def process_text(text):
     return tokens, stemmed_tokens, lemmatized_tokens
 
 # Example usage
-if name == "main":
+if __name__ == "__main__":
     # Accept input text from the user
     user_text = input("Enter a sentence or paragraph: ")
     
